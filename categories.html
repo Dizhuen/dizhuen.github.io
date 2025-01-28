@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!-- saved from url=(0128)file:///C:/Users/User/Desktop/%D0%A1%D0%B0%D0%B9%D1%82%20%D0%9D%D0%B5%D0%B9%D1%80%D0%BE%D0%93%D0%B8%D0%B4/gemini/categories.html -->
-<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>НейроГид - Категории</title>
-    <link rel="stylesheet" href="/style.css">
-    <link href="/css2" rel="stylesheet">
-    <script src="/script.js" defer=""></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const categoryTabs = document.querySelectorAll('.category-tab');
@@ -84,6 +84,15 @@
             });
         });
     </script>
+    <style>
+        .network-name a {
+            color: white;
+            text-decoration: none; /* Optional: removes underline if you don't want it */
+        }
+        .network-name a:hover {
+            text-decoration: underline; /* Optional: adds underline on hover for better UX */
+        }
+    </style>
 </head>
 <body class="dark-theme categories-page-bg">
     <div class="background-animation" id="background-animation">
@@ -93,12 +102,12 @@
     </div>
     <header class="header">
         <div class="container header-container">
-            <a href="/" class="logo">Нейро<span class="logo-accent">Гид</span></a>
+            <a href="index.html" class="logo">Нейро<span class="logo-accent">Гид</span></a>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="/" class="nav-link">Главная</a></li>
-                    <li class="nav-item"><a href="/categories.html" class="nav-link active">Категории</a></li>
-                    <li class="nav-item"><a href="/news.html" class="nav-link">Новости</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="categories.html" class="nav-link active">Категории</a></li>
+                    <li class="nav-item"><a href="news.html" class="nav-link">Новости</a></li>
                 </ul>
             </nav>
             <button class="burger-menu" aria-label="Открыть меню">
@@ -263,9 +272,12 @@
 
     <footer class="footer">
         <div class="container footer-container">
-            <p class="footer-text"> 2025 НейроГид.</p>
+            <p class="footer-text">© 2024 НейроГид. Все права защищены.</p>
             <nav class="footer-nav">
                 <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">О нас</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Контакты</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Политика конфиденциальности</a></li>
                 </ul>
             </nav>
         </div>
