@@ -10,10 +10,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const newsGridContainer = document.getElementById('news-grid-container');
-            const rssFeedUrl = 'https://rss.app/feeds/tRZddqZQUvWuc6YW.xml'; // Обновленный XML RSS URL
+             const rssFeedUrl = 'https://rss.app/feeds/tRZddqZQUvWuc6YW.xml';
             const logoLink = document.querySelector('.logo');
             const burgerMenu = document.querySelector('.burger-menu');
             const nav = document.querySelector('.nav');
+            const loadMoreButton = document.querySelector('.news-more .button');
+            let loadedNewsCount = 0;
+            const newsPerPage = 5;
+
 
 
             burgerMenu.addEventListener('click', () => {
@@ -35,7 +39,7 @@
             });
 
 
-            // --- Процедурная SVG анимация фона ---
+             // --- Процедурная SVG анимация фона ---
             const svgContainer = document.getElementById('background-animation');
             const svg = svgContainer.querySelector('svg');
             const numWaves = 4;
@@ -69,29 +73,38 @@
 
             updateWaves(0);
 
-
             // Функция для загрузки и отображения новостей из RSS (XML)
-            function loadNewsFromRss() {
-                fetch(rssFeedUrl)
+            function loadNewsFromRss(start = 0) {
+            fetch(rssFeedUrl)
                     .then(response => response.text())
                     .then(xmlText => {
                         const parser = new DOMParser();
                         const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
                         const items = xmlDoc.querySelectorAll('item');
-
                         let newsHTML = '';
-                        items.forEach((item, index) => {
+
+                        for (let i = start; i < Math.min(start + newsPerPage, items.length); i++) {
+                            const item = items[i];
                             const title = item.querySelector('title').textContent;
-                            const description = item.querySelector('description').textContent;
+                            let description = item.querySelector('description').textContent;
                             const link = item.querySelector('link').textContent;
+                            const maxWords = 30;
+
 
                             if (!title || !description || !link) {
                                 console.warn('Пропущена новость из-за отсутствия необходимых данных (title, description или link).');
-                                return;
+                                continue;
                             }
 
+                            // Обрезание описания до нужного количества слов
+                            const words = description.trim().split(/\s+/);
+                            if (words.length > maxWords) {
+                                description = words.slice(0, maxWords).join(' ') + '...';
+                            }
+
+
                             newsHTML += `
-                                <article class="news-card" style="--card-animation-delay: ${0.2 + index * 0.1}s">
+                            <article class="news-card" style="--card-animation-delay: ${0.2 + i * 0.1}s">
                                     <div class="news-card-content">
                                         <h3 class="news-card-title">${title}</h3>
                                         <p class="news-card-description">${description}</p>
@@ -99,17 +112,36 @@
                                     </div>
                                 </article>
                             `;
-                        });
 
-                        newsGridContainer.innerHTML = newsHTML;
+                        }
+
+                        newsGridContainer.innerHTML += newsHTML;
+
+
+                          loadedNewsCount += newsPerPage;
+                        if (loadedNewsCount >= items.length) {
+                             loadMoreButton.style.display = 'none';
+                        } else {
+                            loadMoreButton.style.display = 'inline-block';
+                        }
+
                     })
                     .catch(error => {
                         console.error('Ошибка загрузки RSS-ленты:', error);
                         newsGridContainer.innerHTML = '<p>Не удалось загрузить новости из RSS-ленты.</p>';
+                        loadMoreButton.style.display = 'none';
                     });
             }
 
-            loadNewsFromRss();
+
+            // Загрузка первых новостей при загрузке страницы
+           loadNewsFromRss();
+
+            // Загрузка дополнительных новостей по клику на кнопку
+           loadMoreButton.addEventListener('click', (e) => {
+              e.preventDefault();
+               loadNewsFromRss(loadedNewsCount);
+            });
 
         });
     </script>

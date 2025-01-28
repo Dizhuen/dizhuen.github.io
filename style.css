@@ -103,6 +103,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -119,12 +120,14 @@ body {
     font-weight: 700;
     margin-bottom: 20px;
     text-align: center;
+     transition: color 0.3s ease;
 }
 
 .section-subtitle {
     font-size: 1.1rem;
     text-align: center;
     margin-bottom: 40px;
+      transition: color 0.3s ease;
 }
 
 .button {
@@ -182,6 +185,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .header-container {
@@ -196,6 +200,7 @@ body {
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
+      transition: color 0.3s ease;
 }
 
 .logo-accent {
@@ -231,6 +236,7 @@ body {
     border: none;
     cursor: pointer;
     padding: 10px;
+     transition: all 0.3s ease;
 }
 
 .burger-line {
@@ -259,11 +265,13 @@ body {
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
+    transition: color 0.3s ease;
 }
 
 .hero-subtitle {
     font-size: 1.3rem;
     line-height: 1.6;
+      transition: color 0.3s ease;
 }
 
 
@@ -272,6 +280,7 @@ body {
     padding: 60px 0;
     border-radius: 10px;
     margin-bottom: 60px;
+     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .news-container {
@@ -280,6 +289,7 @@ body {
 
 .section-title {
     font-size: 2.2rem;
+       transition: color 0.3s ease;
 }
 
 
@@ -339,12 +349,14 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 10px;
+        transition: color 0.3s ease;
 }
 
 .news-card-description {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 15px;
+      transition: color 0.3s ease;
 }
 
 .news-card-link {
@@ -365,6 +377,7 @@ body {
     padding: 60px 0;
     border-radius: 10px;
     margin-bottom: 60px;
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .categories-container { }
@@ -403,6 +416,7 @@ body {
 .category-content {
     padding: 20px;
     border-radius: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .category-content-title {
@@ -411,12 +425,14 @@ body {
     font-weight: 700;
     margin-bottom: 15px;
     text-align: left;
+    transition: color 0.3s ease;
 }
 
 .category-content-description {
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 25px;
+      transition: color 0.3s ease;
 }
 
 .networks-list {
@@ -442,11 +458,13 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 10px;
+      transition: color 0.3s ease;
 }
 
 .network-description {
     font-size: 1rem;
     line-height: 1.5;
+    transition: color 0.3s ease;
 }
 
 .hidden {
@@ -458,6 +476,7 @@ body {
 .footer {
     padding: 30px 0;
     border-top: 1px solid var(--border-color-dark);
+     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .footer-container {
@@ -470,6 +489,7 @@ body {
 
 .footer-text {
     font-size: 0.9rem;
+      transition: color 0.3s ease;
 }
 
 .footer-nav-list {
