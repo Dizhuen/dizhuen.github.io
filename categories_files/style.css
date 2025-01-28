@@ -1,0 +1,648 @@
+/* Общие стили и переменные для темной темы */
+:root {
+    --primary-color: #26a69a;
+    --text-color-light: #eee;
+    --text-color-dark: #333;
+    --background-dark: #000;
+    --background-light: #f9f9f9;
+    --card-background-dark: #0a0a0a;
+    --card-background-light: #fff;
+    --border-color-dark: #333;
+    --border-color-light: #eee;
+    --shadow-color-dark: rgba(0, 0, 0, 0.3);
+    --shadow-color-light: rgba(0, 0, 0, 0.1);
+
+    --font-family-title: 'Montserrat', sans-serif;
+    --font-family-text: 'Roboto', sans-serif;
+
+    --wave-color-turquoise-1: rgba(64, 224, 208, 0.8);
+    --wave-color-turquoise-2: rgba(64, 224, 208, 0.6);
+    --wave-color-turquoise-3: rgba(64, 224, 208, 0.4);
+    --wave-color-turquoise-4: rgba(64, 224, 208, 0.2);
+}
+
+.dark-theme {
+    background-color: #000;
+    color: var(--text-color-light);
+}
+
+.dark-theme .header {
+    background-color: var(--card-background-dark);
+    box-shadow: 0 1px 5px var(--shadow-color-dark);
+}
+
+.dark-theme .logo,
+.dark-theme .nav-link,
+.dark-theme .burger-line {
+    color: var(--text-color-light);
+}
+
+.dark-theme .nav-link:hover,
+.dark-theme .nav-link.active {
+    color: var(--primary-color);
+}
+
+.dark-theme .section-title,
+.dark-theme .hero-title,
+.dark-theme .category-content-title,
+.dark-theme .network-name,
+.dark-theme .voting-title { /* Добавлено для заголовка голосования, если нужно */
+    color: var(--text-color-light);
+}
+
+.dark-theme .section-subtitle,
+.dark-theme .hero-subtitle,
+.dark-theme .category-content-description,
+.dark-theme .network-description,
+.dark-theme .news-card-description,
+.dark-theme .footer-text,
+.dark-theme .footer-nav-link,
+.dark-theme .voting-subtitle { /* Добавлено для подзаголовка голосования, если нужно */
+    color: var(--text-color-light);
+    opacity: 0.8;
+}
+
+
+.dark-theme .news,
+.dark-theme .categories,
+.dark-theme .categories-preview,
+.dark-theme .footer,
+.dark-theme .news-card,
+.dark-theme .category-card,
+.dark-theme .category-content,
+.dark-theme .voting { /* Добавлено для секции голосования */
+    background-color: rgba(10, 10, 10, 0.8);
+    box-shadow: 0 5px 15px var(--shadow-color-dark);
+    border-color: var(--border-color-dark);
+}
+
+.dark-theme .news-card-link,
+.dark-theme .review-card-link,
+.dark-theme .category-card-title {
+    color: var(--primary-color);
+}
+
+.dark-theme .button {
+    background-color: var(--primary-color);
+    color: var(--text-color-dark);
+}
+
+.dark-theme .button:hover {
+    background-color: #1d786f;
+}
+
+.dark-theme .footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top-color: var(--border-color-dark);
+}
+
+
+/* Общие стили (не зависят от темы) */
+body {
+    font-family: var(--font-family-text);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: var(--font-family-title);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Анимированный фон волн */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    background-color: #000; /* Черный фон для анимации */
+    filter: blur(3px); /* Меньшее размытие фона */
+}
+
+.procedural-waves {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.wave-path {
+    fill: none;
+    stroke: var(--wave-color-turquoise-1);
+    stroke-width: 2;
+    opacity: 0.7;
+}
+
+
+@keyframes waveMove {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 800px;
+    }
+}
+
+
+/* Хедер */
+.header {
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-family-title);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo-accent {
+    color: var(--primary-color);
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-item {
+    margin-left: 25px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color);
+}
+
+.burger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.burger-line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color-dark);
+    margin: 5px 0;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+
+/* Герой секция */
+.hero {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero-container {
+    max-width: 800px;
+}
+
+.hero-title {
+    font-family: var(--font-family-title);
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+
+/* Секция новостей */
+.news {
+    padding: 60px 0;
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+
+.news-container {
+
+}
+
+.section-title {
+    font-size: 2.2rem;
+}
+
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.news-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 0.6s ease-out forwards var(--card-animation-delay, 0.2s);
+    display: flex;
+    flex-direction: column;
+}
+
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.news-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.news-card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+}
+
+.news-card-title {
+    font-family: var(--font-family-title);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.news-card-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.news-card-link {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    margin-top: 15px;
+}
+
+.news-more {
+    text-align: center;
+}
+
+
+/* Секция категорий (вкладки) */
+.categories {
+    padding: 60px 0;
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+
+.categories-container { }
+
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color-dark);
+}
+
+.category-tab {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-family: var(--font-family-title);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color-light);
+    cursor: pointer;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.category-tab:hover, .category-tab.active-tab {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.active-tab {
+    border-bottom: var(--primary-color);
+}
+
+
+.category-content {
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.category-content-title {
+    font-family: var(--font-family-title);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.category-content-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.networks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.network-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+.network-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.network-name {
+    font-family: var(--font-family-title);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.network-description {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* Футер */
+.footer {
+    padding: 30px 0;
+    border-top: 1px solid var(--border-color-dark);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-text {
+    font-size: 0.9rem;
+}
+
+.footer-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.footer-nav-item {
+    margin-left: 20px;
+}
+
+.footer-nav-link {
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-nav-link:hover {
+    color: var(--primary-color);
+}
+
+
+/* Секция голосования (обновлено для iframe) */
+.voting {
+    padding: 60px 0;
+    border-radius: 10px;
+    margin-bottom: 60px;
+    overflow: hidden; /*  Чтобы iframe не выходил за границы border-radius, если есть  */
+}
+
+.voting-container {
+    text-align: center; /* Центрирование содержимого, если нужно */
+    max-width: 700px; /*  Пример ограничения максимальной ширины формы  */
+    margin: 0 auto;    /* Центрирование контейнера по горизонтали, если max-width задан */
+}
+
+/*  Дополнительно, если хотите стилизовать iframe (ограниченно)  */
+.voting-container iframe {
+    border: none; /*  Убрать рамку вокруг iframe, если нужно  */
+    border-radius: 10px; /*  Соответствие border-radius секции voting, если нужно  */
+    display: block; /*  Убрать возможные отступы снизу iframe  */
+    margin: 0 auto; /* Центрирование iframe внутри voting-container, если нужно */
+}
+
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding: 80px 0;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--card-background-dark);
+        z-index: 99;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(100%);
+        transition: transform 0.5s ease;
+    }
+
+    .nav.open {
+        transform: translateX(0);
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-item {
+        margin: 20px 0;
+        margin-left: 0;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+
+    .burger-menu.active .burger-line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .burger-menu.active .burger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger-menu.active .burger-line:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .category-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    .category-tab {
+        margin-bottom: 10px;
+        border-bottom: 2px solid var(--primary-color);
+        width: 100%;
+        text-align: center;
+    }
+    .category-tab:last-child {
+        margin-bottom: 0;
+        border-bottom: 2px solid transparent;
+    }
+    .category-tab.active-tab {
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .news-grid, .reviews-grid, .categories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-nav-list {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .footer-nav-item {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
