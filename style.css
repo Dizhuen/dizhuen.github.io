@@ -23,7 +23,7 @@
 
 .dark-theme {
     background-color: #000;
-    color: var(--text-color-light);
+    color: #eeeeee00;
 }
 
 .dark-theme .header {
@@ -68,8 +68,8 @@
 .dark-theme .news-card,
 .dark-theme .category-card,
 .dark-theme .category-content {
-    background-color: rgba(10, 10, 10, 0.8);
-    box-shadow: 0 5px 15px var(--shadow-color-dark);
+    background-color: rgb(10 10 10 / 23%);
+    box-shadow: -16px -14px 20px 0px rgb(0 0 0);
     border-color: var(--border-color-dark);
 }
 
