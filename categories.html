@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>НейроГид - Категории</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const categoryContents = document.querySelectorAll('.category-content');
+            const burgerMenu = document.querySelector('.burger-menu');
+            const nav = document.querySelector('.nav');
+            const logoLink = document.querySelector('.logo');
+
+
+            burgerMenu.addEventListener('click', () => {
+                burgerMenu.classList.toggle('active');
+                nav.classList.toggle('open');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    burgerMenu.classList.remove('active');
+                    nav.classList.remove('open');
+                });
+            });
+
+            logoLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'index.html'; // Относительная ссылка на главную
+            });
+
+
+            // --- Процедурная SVG анимация фона ---
+            const svgContainer = document.getElementById('background-animation');
+            const svg = svgContainer.querySelector('svg');
+            const numWaves = 4;
+            const waveData = [];
+
+            for (let i = 0; i < numWaves; i++) {
+                waveData.push({
+                    path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
+                    amplitude: 30 + i * 10,
+                    frequency: 0.02 + i * 0.01,
+                    phase: i * 2,
+                    colorIndex: i + 1
+                });
+                waveData[i].path.setAttribute('class', 'wave-path');
+                svg.appendChild(waveData[i].path);
+            }
+
+            function updateWaves(time) {
+                waveData.forEach(wave => {
+                    let pathD = 'M0,600 ';
+                    for (let x = 0; x <= 800; x += 10) {
+                        const y = 500 + wave.amplitude * Math.sin(wave.frequency * x + time / 1000 + wave.phase);
+                        pathD += `L${x},${y} `;
+                    }
+                    pathD += 'L800,600 Z';
+                    wave.path.setAttribute('d', pathD);
+                    wave.path.setAttribute('stroke', `var(--wave-color-turquoise-${wave.colorIndex})`);
+                });
+                requestAnimationFrame(updateWaves);
+            }
+
+            updateWaves(0);
+
+
+            // Логика для табов категорий
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const category = tab.dataset.category;
+
+                    categoryTabs.forEach(t => t.classList.remove('active-tab'));
+                    categoryContents.forEach(content => content.classList.add('hidden'));
+
+                    tab.classList.add('active-tab');
+                    document.getElementById(`category-${category}-content`).classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+</head>
+<body class="dark-theme categories-page-bg">
+    <div class="background-animation" id="background-animation">
+        <svg class="procedural-waves" viewBox="0 0 800 600" preserveAspectRatio="none">
+            <!-- Процедурные волны будут добавлены сюда через JavaScript -->
+        </svg>
+    </div>
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Нейро<span class="logo-accent">Гид</span></a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="categories.html" class="nav-link active">Категории</a></li>
+                    <li class="nav-item"><a href="news.html" class="nav-link">Новости</a></li>
+                </ul>
+            </nav>
+            <button class="burger-menu" aria-label="Открыть меню">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="categories" id="categories-section">
+            <div class="container categories-container">
+                <h2 class="section-title">Категории нейросетей</h2>
+                <div class="category-tabs">
+                    <button class="category-tab active-tab" data-category="image">Генерация изображений</button>
+                    <button class="category-tab" data-category="text">Генерация текста</button>
+                    <button class="category-tab" data-category="audio">Генерация аудио</button>
+                    <button class="category-tab" data-category="video">Генерация видео</button>
+                    <button class="category-tab" data-category="code">Генерация кода</button>
+                    <button class="category-tab" data-category="other">Другие</button>
+                </div>
+
+                <div class="category-content" id="category-image-content">
+                    <h3 class="category-content-title">Генерация изображений</h3>
+                    <p class="category-content-description">Нейросети для создания визуального контента: фотореалистичные изображения, иллюстрации, арт и многое другое.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name">DALL-E 3</h4>
+                            <p class="network-description">Описание DALL-E 3...</p>
+                        </li>
+                        <li class="network-item">
+                            <h4 class="network-name">Midjourney</h4>
+                            <p class="network-description">Описание Midjourney...</p>
+                        </li>
+                        <li class="network-item">
+                            <h4 class="network-name">Stable Diffusion</h4>
+                            <p class="network-description">Описание Stable Diffusion...</p>
+                        </li>
+                        <!-- ... и другие нейросети ... -->
+                    </ul>
+                </div>
+
+                <div class="category-content hidden" id="category-text-content">
+                    <h3 class="category-content-title">Генерация текста</h3>
+                    <p class="category-content-description">Нейросети для создания текстового контента: статьи, посты, код, стихи и многое другое.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name">GPT-4</h4>
+                            <p class="network-description">Описание GPT-4...</p>
+                        </li>
+                        <li class="network-item">
+                            <h4 class="network-name">Claude 3</h4>
+                            <p class="network-description">Описание Claude 3...</p>
+                        </li>
+                        <!-- ... и другие нейросети ... -->
+                    </ul>
+                </div>
+
+                <div class="category-content hidden" id="category-audio-content">
+                    <h3 class="category-content-title">Генерация аудио</h3>
+                    <p class="category-content-description">Нейросети для создания аудио контента: музыка, звуковые эффекты, голоса и т.д.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name">MusicLM</h4>
+                            <p class="network-description">Описание MusicLM...</p>
+                        </li>
+                        <!-- ... и другие нейросети ... -->
+                    </ul>
+                </div>
+
+                 <div class="category-content hidden" id="category-video-content">
+                    <h3 class="category-content-title">Генерация видео</h3>
+                    <p class="category-content-description">Нейросети для создания и обработки видео контента.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name">Make-A-Video</h4>
+                            <p class="network-description">Описание Make-A-Video...</p>
+                        </li>
+                        <!-- ... и другие нейросети ... -->
+                    </ul>
+                </div>
+
+                 <div class="category-content hidden" id="category-code-content">
+                    <h3 class="category-content-title">Генерация кода</h3>
+                    <p class="category-content-description">Нейросети для помощи в написании и генерации программного кода.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name">GitHub Copilot</h4>
+                            <p class="network-description">Описание GitHub Copilot...</p>
+                        </li>
+                        <!-- ... и другие нейросети ... -->
+                    </ul>
+                </div>
+
+                 <div class="category-content hidden" id="category-other-content">
+                    <h3 class="category-content-title">Другие</h3>
+                    <p class="category-content-description">Различные нейросети, не вошедшие в основные категории.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name">AlphaFold</h4>
+                            <p class="network-description">Описание AlphaFold...</p>
+                        </li>
+                        <!-- ... и другие нейросети ... -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="footer-text">&copy; 2024 НейроГид. Все права защищены.</p>
+            <nav class="footer-nav">
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">О нас</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Контакты</a></li>
+                    <li class="footer-nav-item"><a href="#" class="footer-nav-link">Политика конфиденциальности</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
