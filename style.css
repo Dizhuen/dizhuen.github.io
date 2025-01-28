@@ -162,7 +162,7 @@ body {
 }
 
 .wave-path {
-    fill: none;
+    fill: rgb(64 224 208 / 10%);
     stroke: var(--wave-color-turquoise-1);
     stroke-width: 8;
     opacity: 0.7;
@@ -411,7 +411,7 @@ body {
     color: var(--text-color-light);
     cursor: pointer;
     transition: color 0.3s ease, border-bottom-color 0.3s ease;
-    border-bottom: 2px solid transparent;
+    border-bottom: 2px solid #15bd99f2;
     margin-bottom: -2px;
 }
 
