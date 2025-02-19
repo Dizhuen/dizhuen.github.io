@@ -323,6 +323,45 @@ body {
     flex-direction: column;
 }
 
+.news-card-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.news-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-card-image {
+    transform: scale(1.05);
+}
+
+.news-card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.error-message {
+    text-align: center;
+    color: #ff6b6b;
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+/* Adjust existing news-card styles */
+.news-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--card-background-dark);
+}
 
 @keyframes fadeInSlideUp {
     from {

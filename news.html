@@ -6,150 +6,11 @@
     <title>НейроГид - Новости</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <script src="script.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const newsGridContainer = document.getElementById('news-grid-container');
-             const rssFeedUrl = 'https://morss.it/:clip/https://habr.com/ru/hubs/artificial_intelligence/articles/';
-            const logoLink = document.querySelector('.logo');
-            const burgerMenu = document.querySelector('.burger-menu');
-            const nav = document.querySelector('.nav');
-            const loadMoreButton = document.querySelector('.news-more .button');
-            let loadedNewsCount = 0;
-            const newsPerPage = 5;
-
-
-
-            burgerMenu.addEventListener('click', () => {
-                burgerMenu.classList.toggle('active');
-                nav.classList.toggle('open');
-            });
-
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    burgerMenu.classList.remove('active');
-                    nav.classList.remove('open');
-                });
-            });
-
-            logoLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = 'index.html'; // Относительная ссылка на главную
-            });
-
-
-             // --- Процедурная SVG анимация фона ---
-            const svgContainer = document.getElementById('background-animation');
-            const svg = svgContainer.querySelector('svg');
-            const numWaves = 4;
-            const waveData = [];
-
-            for (let i = 0; i < numWaves; i++) {
-                waveData.push({
-                    path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
-                    amplitude: 30 + i * 10,
-                    frequency: 0.02 + i * 0.01,
-                    phase: i * 2,
-                    colorIndex: i + 1
-                });
-                waveData[i].path.setAttribute('class', 'wave-path');
-                svg.appendChild(waveData[i].path);
-            }
-
-            function updateWaves(time) {
-                waveData.forEach(wave => {
-                    let pathD = 'M0,600 ';
-                    for (let x = 0; x <= 800; x += 10) {
-                        const y = 500 + wave.amplitude * Math.sin(wave.frequency * x + time / 1000 + wave.phase);
-                        pathD += `L${x},${y} `;
-                    }
-                    pathD += 'L800,600 Z';
-                    wave.path.setAttribute('d', pathD);
-                    wave.path.setAttribute('stroke', `var(--wave-color-turquoise-${wave.colorIndex})`);
-                });
-                requestAnimationFrame(updateWaves);
-            }
-
-            updateWaves(0);
-
-            // Функция для загрузки и отображения новостей из RSS (XML)
-            function loadNewsFromRss(start = 0) {
-            fetch(rssFeedUrl)
-                    .then(response => response.text())
-                    .then(xmlText => {
-                        const parser = new DOMParser();
-                        const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-                        const items = xmlDoc.querySelectorAll('item');
-                        let newsHTML = '';
-
-                        for (let i = start; i < Math.min(start + newsPerPage, items.length); i++) {
-                            const item = items[i];
-                            const title = item.querySelector('title').textContent;
-                            let description = item.querySelector('description').textContent;
-                            const link = item.querySelector('link').textContent;
-                            const maxWords = 25;
-
-
-                            if (!title || !description || !link) {
-                                console.warn('Пропущена новость из-за отсутствия необходимых данных (title, description или link).');
-                                continue;
-                            }
-
-                            // Обрезание описания до нужного количества слов
-                            const words = description.trim().split(/\s+/);
-                            if (words.length > maxWords) {
-                                description = words.slice(0, maxWords).join(' ') + '...';
-                            }
-
-
-                            newsHTML += `
-                            <article class="news-card" style="--card-animation-delay: ${0.2 + i * 0.1}s">
-                                    <div class="news-card-content">
-                                        <h3 class="news-card-title">${title}</h3>
-                                        <p class="news-card-description">${description}</p>
-                                        <a href="${link}" class="news-card-link" target="_blank">Читать далее</a>
-                                    </div>
-                                </article>
-                            `;
-
-                        }
-
-                        newsGridContainer.innerHTML += newsHTML;
-
-
-                          loadedNewsCount += newsPerPage;
-                        if (loadedNewsCount >= items.length) {
-                             loadMoreButton.style.display = 'none';
-                        } else {
-                            loadMoreButton.style.display = 'inline-block';
-                        }
-
-                    })
-                    .catch(error => {
-                        console.error('Ошибка загрузки RSS-ленты:', error);
-                        newsGridContainer.innerHTML = '<p>Не удалось загрузить новости из RSS-ленты.</p>';
-                        loadMoreButton.style.display = 'none';
-                    });
-            }
-
-
-            // Загрузка первых новостей при загрузке страницы
-           loadNewsFromRss();
-
-            // Загрузка дополнительных новостей по клику на кнопку
-           loadMoreButton.addEventListener('click', (e) => {
-              e.preventDefault();
-               loadNewsFromRss(loadedNewsCount);
-            });
-
-        });
-    </script>
 </head>
 <body class="dark-theme news-page-bg">
     <div class="background-animation" id="background-animation">
         <svg class="procedural-waves" viewBox="0 0 800 600" preserveAspectRatio="none">
-            <!-- Процедурные волны будут добавлены сюда через JavaScript -->
+            <!-- Процедурные волны будут добавлены через JavaScript -->
         </svg>
     </div>
     <header class="header">
@@ -193,5 +54,75 @@
             </nav>
         </div>
     </footer>
+
+    <!-- Анимация фона -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const svgContainer = document.getElementById('background-animation');
+            const svg = svgContainer.querySelector('svg');
+            const numWaves = 4;
+            const waveData = [];
+
+            for (let i = 0; i < numWaves; i++) {
+                waveData.push({
+                    path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
+                    amplitude: 30 + i * 10,
+                    frequency: 0.02 + i * 0.01,
+                    phase: i * 2,
+                    colorIndex: i + 1
+                });
+                waveData[i].path.setAttribute('class', 'wave-path');
+                svg.appendChild(waveData[i].path);
+            }
+
+            function updateWaves(time) {
+                waveData.forEach(wave => {
+                    let pathD = 'M0,600 ';
+                    for (let x = 0; x <= 800; x += 10) {
+                        const y = 500 + wave.amplitude * Math.sin(wave.frequency * x + time / 1000 + wave.phase);
+                        pathD += `L${x},${y} `;
+                    }
+                    pathD += 'L800,600 Z';
+                    wave.path.setAttribute('d', pathD);
+                    wave.path.setAttribute('stroke', `var(--wave-color-turquoise-${wave.colorIndex})`);
+                });
+                requestAnimationFrame(updateWaves);
+            }
+
+            updateWaves(0);
+        });
+    </script>
+
+    <!-- Навигация -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerMenu = document.querySelector('.burger-menu');
+            const nav = document.querySelector('.nav');
+            const logoLink = document.querySelector('.logo');
+
+            if (burgerMenu && nav) {
+                burgerMenu.addEventListener('click', () => {
+                    burgerMenu.classList.toggle('active');
+                    nav.classList.toggle('open');
+                });
+            }
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    burgerMenu.classList.remove('active');
+                    nav.classList.remove('open');
+                });
+            });
+
+            logoLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+
+    <!-- RSS лента -->
+    <script src="script.js"></script>
 </body>
 </html>
