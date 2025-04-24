@@ -7,67 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const burgerMenu = document.querySelector('.burger-menu');
-            const nav = document.querySelector('.nav');
-            const logoLink = document.querySelector('.logo');
-
-            burgerMenu.addEventListener('click', () => {
-                burgerMenu.classList.toggle('active');
-                nav.classList.toggle('open');
-            });
-
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    burgerMenu.classList.remove('active');
-                    nav.classList.remove('open');
-                });
-            });
-
-            logoLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = './'; // Главная страница - теперь относительный путь
-            });
-
-
-            // --- Процедурная SVG анимация фона ---
-            const svgContainer = document.getElementById('background-animation');
-            const svg = svgContainer.querySelector('svg');
-            const numWaves = 4;
-            const waveData = [];
-
-            for (let i = 0; i < numWaves; i++) {
-                waveData.push({
-                    path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
-                    amplitude: 30 + i * 10,
-                    frequency: 0.02 + i * 0.01,
-                    phase: i * 2,
-                    colorIndex: i + 1
-                });
-                waveData[i].path.setAttribute('class', 'wave-path');
-                svg.appendChild(waveData[i].path);
-            }
-
-            function updateWaves(time) {
-                waveData.forEach(wave => {
-                    let pathD = 'M0,600 ';
-                    for (let x = 0; x <= 800; x += 10) {
-                        const y = 500 + wave.amplitude * Math.sin(wave.frequency * x + time / 1000 + wave.phase);
-                        pathD += `L${x},${y} `;
-                    }
-                    pathD += 'L800,600 Z';
-                    wave.path.setAttribute('d', pathD);
-                    wave.path.setAttribute('stroke', `var(--wave-color-turquoise-${wave.colorIndex})`);
-                });
-                requestAnimationFrame(updateWaves);
-            }
-
-            updateWaves(0);
-
-        });
-    </script>
 </head>
 <body class="dark-theme index-page-bg">
     <div class="background-animation" id="background-animation">
@@ -77,11 +16,12 @@
     </div>
     <header class="header">
         <div class="container header-container">
-            <a href="./" class="logo">Нейро<span class="logo-accent">Гид</span></a>
+            <a href="index.html" class="logo">Нейро<span class="logo-accent">Гид</span></a>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="./" class="nav-link active">Главная</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link active">Главная</a></li>
                     <li class="nav-item"><a href="categories.html" class="nav-link">Категории</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li> <!-- Added Comparison link -->
                     <li class="nav-item"><a href="news.html" class="nav-link">Новости</a></li>
                 </ul>
             </nav>
@@ -120,6 +60,7 @@
             <p class="footer-text">&copy; 2025 НейроГид.</p>
             <nav class="footer-nav">
                 <ul class="footer-nav-list">
+                    <!-- Footer links can be added here if needed -->
                 </ul>
             </nav>
         </div>

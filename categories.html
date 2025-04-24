@@ -7,100 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const categoryTabs = document.querySelectorAll('.category-tab');
-            const categoryContents = document.querySelectorAll('.category-content');
-            const burgerMenu = document.querySelector('.burger-menu');
-            const nav = document.querySelector('.nav');
-            const logoLink = document.querySelector('.logo');
-
-
-            burgerMenu.addEventListener('click', () => {
-                burgerMenu.classList.toggle('active');
-                nav.classList.toggle('open');
-            });
-
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    burgerMenu.classList.remove('active');
-                    nav.classList.remove('open');
-                });
-            });
-
-            logoLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = 'index.html';
-            });
-
-
-            // --- Процедурная SVG анимация фона ---
-            const svgContainer = document.getElementById('background-animation');
-            const svg = svgContainer.querySelector('svg');
-            const numWaves = 4;
-            const waveData = [];
-
-            for (let i = 0; i < numWaves; i++) {
-                waveData.push({
-                    path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
-                    amplitude: 30 + i * 10,
-                    frequency: 0.02 + i * 0.01,
-                    phase: i * 2,
-                    colorIndex: i + 1
-                });
-                waveData[i].path.setAttribute('class', 'wave-path');
-                svg.appendChild(waveData[i].path);
-            }
-
-            function updateWaves(time) {
-                waveData.forEach(wave => {
-                    let pathD = 'M0,600 ';
-                    for (let x = 0; x <= 800; x += 10) {
-                        const y = 500 + wave.amplitude * Math.sin(wave.frequency * x + time / 1000 + wave.phase);
-                        pathD += `L${x},${y} `;
-                    }
-                    pathD += 'L800,600 Z';
-                    wave.path.setAttribute('d', pathD);
-                    wave.path.setAttribute('stroke', `var(--wave-color-turquoise-${wave.colorIndex})`);
-                });
-                requestAnimationFrame(updateWaves);
-            }
-
-            updateWaves(0);
-
-
-            // Логика для табов категорий
-            categoryTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const category = tab.dataset.category;
-
-                    categoryTabs.forEach(t => t.classList.remove('active-tab'));
-                    categoryContents.forEach(content => {
-                       content.style.opacity = 0;
-                       content.classList.add('hidden');
-                    });
-
-                    tab.classList.add('active-tab');
-                   const activeContent =  document.getElementById(`category-${category}-content`);
-                    activeContent.classList.remove('hidden');
-                     setTimeout(() => {
-                        activeContent.style.opacity = 1;
-                     }, 50);
-
-                });
-            });
-        });
-    </script>
-    <style>
-        .network-name a {
-            color: white;
-            text-decoration: none; /* Optional: removes underline if you don't want it */
-        }
-        .network-name a:hover {
-            text-decoration: underline; /* Optional: adds underline on hover for better UX */
-        }
-    </style>
 </head>
 <body class="dark-theme categories-page-bg">
     <div class="background-animation" id="background-animation">
@@ -115,6 +21,7 @@
                 <ul class="nav-list">
                     <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
                     <li class="nav-item"><a href="categories.html" class="nav-link active">Категории</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li> <!-- Added Comparison link -->
                     <li class="nav-item"><a href="news.html" class="nav-link">Новости</a></li>
                 </ul>
             </nav>
@@ -130,160 +37,173 @@
         <section class="categories" id="categories-section">
             <div class="container categories-container">
                 <h2 class="section-title">Категории нейросетей</h2>
+                 <p class="section-subtitle">Обзор основных категорий искусственного интеллекта и нейросетей.</p>
                 <div class="category-tabs">
                     <button class="category-tab" data-category="image">Генерация изображений</button>
                     <button class="category-tab" data-category="text">Генерация текста</button>
                     <button class="category-tab" data-category="audio">Генерация аудио</button>
-                    <button class="category-tab active-tab" data-category="video">Генерация видео</button>
+                    <button class="category-tab" data-category="video">Генерация видео</button>
                     <button class="category-tab" data-category="code">Генерация кода</button>
                     <button class="category-tab" data-category="other">Другие</button>
                 </div>
 
-                <div class="category-content hidden" id="category-image-content">
+                <!-- Content for each tab - ADDED data-category ATTRIBUTES -->
+                <div class="category-content" data-category="image">
                     <h3 class="category-content-title">Генерация изображений</h3>
-                    <p class="category-content-description">Нейросети для создания визуального контента: фотореалистичные изображения, иллюстрации, арт и многое другое.</p>
+                    <p class="category-content-description">Нейросети для создания визуального контента: фотореалистичные изображения, иллюстрации, арт и многое другое. Эти инструменты трансформируют текстовые описания в уникальные визуальные произведения.</p>
                     <ul class="networks-list">
                         <li class="network-item">
                             <h4 class="network-name"><a href="https://openai.com/dall-e-3" target="_blank" rel="noopener noreferrer">DALL-E 3</a></h4>
-                            <p class="network-description">Продвинутая нейросеть от OpenAI, генерирующая изображения с высокой детализацией и пониманием сложных текстовых запросов.</p>
+                            <p class="network-description">Инструмент от OpenAI, позволяющий создавать детализированные изображения по текстовому описанию.</p>
                         </li>
                         <li class="network-item">
                             <h4 class="network-name"><a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer">Midjourney</a></h4>
-                            <p class="network-description">Популярная нейросеть, известная своим художественным стилем и способностью создавать креативные и абстрактные изображения.</p>
+                            <p class="network-description">Популярная нейросеть, известная своим художественным стилем и активным сообществом.</p>
                         </li>
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://fluxai.studio/" target="_blank" rel="noopener noreferrer">Flux</a></h4>
-                            <p class="network-description">Мощная нейросеть для генерации фотореалистичных изображений с акцентом на детализацию и высокое качество.</p>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://stablediffusion.com/" target="_blank" rel="noopener noreferrer">Stable Diffusion</a></h4>
+                            <p class="network-description">Открытая модель для генерации изображений, предоставляющая высокую гибкость и возможности для кастомизации.</p>
                         </li>
-                        <li class="network-item">
+                         <li class="network-item">
                             <h4 class="network-name"><a href="https://ideogram.ai/" target="_blank" rel="noopener noreferrer">Ideogram</a></h4>
-                            <p class="network-description">Нейросеть, специализирующаяся на генерации изображений с интегрированным текстом и типографикой, идеально подходит для создания дизайн-макетов и рекламы.</p>
+                            <p class="network-description">Нейросеть, хорошо справляющаяся с генерацией изображений, содержащих текст.</p>
                         </li>
-                        <li class="network-item">
+                         <li class="network-item">
                             <h4 class="network-name"><a href="https://leonardo.ai/" target="_blank" rel="noopener noreferrer">Leonardo.AI</a></h4>
-                            <p class="network-description">Универсальная платформа для создания концепт-артов, предлагающая различные модели и инструменты для художников и дизайнеров.</p>
+                            <p class="network-description">Платформа с различными инструментами для создания концепт-артов и иллюстраций с помощью ИИ.</p>
                         </li>
                     </ul>
                 </div>
 
-                <div class="category-content hidden" id="category-text-content">
+                <div class="category-content" data-category="text">
                     <h3 class="category-content-title">Генерация текста</h3>
-                    <p class="category-content-description">Нейросети для создания текстового контента: статьи, посты, код, стихи и многое другое.</p>
+                    <p class="category-content-description">Большие языковые модели (LLMs), способные понимать и генерировать человеческий текст, отвечать на вопросы, писать статьи, стихи и даже программный код.</p>
                     <ul class="networks-list">
                         <li class="network-item">
                             <h4 class="network-name"><a href="https://openai.com/gpt-4" target="_blank" rel="noopener noreferrer">GPT-4</a></h4>
-                            <p class="network-description">Флагманская модель от OpenAI, способная генерировать связные, креативные и информативные тексты, поддерживая различные стили и форматы.</p>
+                            <p class="network-description">Разработанная OpenAI, одна из самых мощных и универсальных моделей в мире.</p>
                         </li>
-                        <li class="network-item">
+                         <li class="network-item">
                             <h4 class="network-name"><a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude 3</a></h4>
-                            <p class="network-description">Конкурент GPT от Anthropic, выделяется безопасностью, этичностью и способностью к ведению сложных диалогов и анализу больших объемов информации.</p>
+                            <p class="network-description">Семейство моделей от Anthropic, делающее акцент на безопасность и обработку очень длинных текстов.</p>
                         </li>
-                        <li class="network-item">
+                         <li class="network-item">
                             <h4 class="network-name"><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini</a></h4>
-                            <p class="network-description">Мультимодальная модель от Google, интегрированная с поиском и сервисами Google, отлично подходит для задач, требующих доступа к актуальной информации и интеграции с другими инструментами.</p>
+                            <p class="network-description">Мультимодальная модель от Google, глубоко интегрированная с поиском и другими сервисами Google.</p>
                         </li>
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://llama.meta.com/" target="_blank" rel="noopener noreferrer">LLaMA</a></h4>
-                            <p class="network-description">Семейство открытых моделей от Meta, доступных для исследований и коммерческого использования, предоставляя гибкость и контроль над генерацией текста.</p>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://llama.meta.com/" target="_blank" rel="noopener noreferrer">LLaMA (Meta)</a></h4>
+                            <p class="network-description">Семейство открытых языковых моделей от Meta, популярных среди исследователей и разработчиков.</p>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://yandex.ru/gpt" target="_blank" rel="noopener noreferrer">YandexGPT</a></h4>
+                            <p class="network-description">Крупная языковая модель от Яндекса, адаптированная для русскоязычного контента.</p>
                         </li>
                     </ul>
                 </div>
 
-                <div class="category-content hidden" id="category-audio-content">
+                 <div class="category-content" data-category="audio">
                     <h3 class="category-content-title">Генерация аудио</h3>
-                    <p class="category-content-description">Нейросети для создания аудио контента: музыка, звуковые эффекты, голоса и т.д.</p>
+                    <p class="category-content-description">Нейросети для создания музыки, синтеза речи, клонирования голоса и генерации различных звуковых эффектов по текстовому или аудиовходу.</p>
                     <ul class="networks-list">
                         <li class="network-item">
                             <h4 class="network-name"><a href="https://www.suno.ai/" target="_blank" rel="noopener noreferrer">SunoAI</a></h4>
-                            <p class="network-description">Инновационная платформа для создания музыки с вокалом и инструментальными партиями, позволяющая генерировать полноценные песни различных жанров.</p>
+                            <p class="network-description">Позволяет создавать полноценные песни с вокалом и инструментальной частью по текстовому описанию.</p>
                         </li>
-                        <li class="network-item">
+                         <li class="network-item">
                             <h4 class="network-name"><a href="https://elevenlabs.io/" target="_blank" rel="noopener noreferrer">ElevenLabs</a></h4>
-                            <p class="network-description">Сервис для генерации реалистичного человеческого голоса, подходит для озвучивания текста, создания аудиокниг и голосовых помощников.</p>
+                            <p class="network-description">Лидер в области высококачественного синтеза речи и клонирования голоса с поддержкой множества языков.</p>
                         </li>
-                        <li class="network-item">
+                         <li class="network-item">
                             <h4 class="network-name"><a href="https://www.udio.com/" target="_blank" rel="noopener noreferrer">Udio</a></h4>
-                            <p class="network-description">Нейросеть для создания музыки разных жанров, от эмбиента до рока, с возможностью кастомизации и управления музыкальными элементами.</p>
+                            <p class="network-description">Платформа для генерации музыки, похожая на Suno, с акцентом на различные жанры и структуры песен.</p>
                         </li>
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://www.riffusion.com/" target="_blank" rel="noopener noreferrer">Riffusion</a></h4>
-                            <p class="network-description">Модель для создания музыки из текстовых описаний, визуализирующая звук в виде спектрограмм, что позволяет интуитивно управлять музыкальным процессом.</p>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://openai.com/sora" target="_blank" rel="noopener noreferrer">Voice Engine (OpenAI - Связано с аудио в продуктах)</a></h4>
+                             <p class="network-description">Технология синтеза речи от OpenAI, способная воспроизводить человеческие голоса с высокой точностью.</p>
                         </li>
                     </ul>
                 </div>
 
-                 <div class="category-content" id="category-video-content">
+                 <div class="category-content" data-category="video">
                     <h3 class="category-content-title">Генерация видео</h3>
-                    <p class="category-content-description">Нейросети для создания и обработки видео контента.</p>
+                    <p class="category-content-description">Нейросети для создания коротких видеороликов, анимаций, а также для улучшения и модификации существующего видеоконтента с помощью текстовых запросов.</p>
                     <ul class="networks-list">
                         <li class="network-item">
-                            <h4 class="network-name"><a href="https://runwayml.com/" target="_blank" rel="noopener noreferrer">Runway</a></h4>
-                            <p class="network-description">Комплексная платформа для видео-креаторов, предлагающая инструменты для генерации видео, редактирования и визуальных эффектов, включая Motion Brush и Gen-1.</p>
-                        </li>
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://lumalabs.ai/dream-machine" target="_blank" rel="noopener noreferrer">Luma Dream Machine</a></h4>
-                            <p class="network-description">Нейросеть для создания реалистичных и кинематографичных видеороликов, способная генерировать плавные движения камеры и детализированные сцены.</p>
+                            <h4 class="network-name"><a href="https://openai.com/sora" target="_blank" rel="noopener noreferrer">Sora (OpenAI)</a></h4>
+                            <p class="network-description">Модель от OpenAI, способная создавать реалистичные и связные видео до одной минуты по текстовому описанию.</p>
                         </li>
                          <li class="network-item">
-                            <h4 class="network-name">
-                                <a href="https://hailuoai.video/" target="_blank" rel="noopener noreferrer">HailuoAi Video</a>
-                            </h4>
-                            <p class="network-description">Инструмент для создания коротких рекламных и вирусных видео, оптимизированный для социальных сетей и мобильных платформ, с акцентом на скорость и простоту использования.</p>
+                            <h4 class="network-name"><a href="https://www.runwayml.com/" target="_blank" rel="noopener noreferrer">RunwayML</a></h4>
+                            <p class="network-description">Платформа с набором ИИ-инструментов для видеоредактирования и генерации видео (Gen-1, Gen-2).</p>
                         </li>
-                        <li class="network-item">
+                         <li class="network-item">
                             <h4 class="network-name"><a href="https://pika.art/" target="_blank" rel="noopener noreferrer">Pika Labs</a></h4>
-                            <p class="network-description">Платформа для создания и редактирования видео на основе нейросетей, предлагающая инструменты для анимации, стилизации и трансформации видеоконтента.</p>
-                        </li>
-                    </ul>
-                </div>
-
-                 <div class="category-content hidden" id="category-code-content">
-                    <h3 class="category-content-title">Генерация кода</h3>
-                    <p class="category-content-description">Нейросети для помощи в написании и генерации программного кода.</p>
-                    <ul class="networks-list">
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">GitHub Copilot</a></h4>
-                            <p class="network-description">Интеллектуальный помощник для программистов от GitHub и OpenAI, предлагающий автодополнение кода, генерацию функций и целых блоков кода на основе контекста.</p>
-                        </li>
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a></h4>
-                            <p class="network-description">Нейросеть от Anthropic, также способная генерировать код на различных языках программирования, отличающаяся способностью к пониманию сложных инструкций и стилей кодирования.</p>
-                        </li>
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://www.tabnine.com/" target="_blank" rel="noopener noreferrer">Tabnine</a></h4>
-                            <p class="network-description">AI-ассистент для кодирования, поддерживающий более 30 языков программирования и интегрирующийся с популярными IDE, помогает ускорить процесс разработки и уменьшить количество ошибок.</p>
-                        </li>
-                    </ul>
-                </div>
-
-                 <div class="category-content hidden" id="category-other-content">
-                    <h3 class="category-content-title">Другие</h3>
-                    <p class="category-content-description">Различные нейросети, не вошедшие в основные категории.</p>
-                    <ul class="networks-list">
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://www.deepmind.com/research/highlighted-research/alphafold" target="_blank" rel="noopener noreferrer">AlphaFold</a></h4>
-                            <p class="network-description">Революционная нейросеть от DeepMind, предсказывающая 3D-структуру белков на основе их аминокислотной последовательности, прорыв в биологии и медицине.</p>
+                            <p class="network-description">Нейросеть для создания коротких видео и анимаций, часто используется через Discord или веб.</p>
                         </li>
                          <li class="network-item">
-                            <h4 class="network-name"><a href="https://www.wolframalpha.com/" target="_blank" rel="noopener noreferrer">WolframAlpha</a></h4>
-                            <p class="network-description">Вычислительная поисковая система, использующая нейросети для обработки запросов на естественном языке и предоставления точных ответов и расчетов по различным областям знаний.</p>
-                        </li>
-                        <li class="network-item">
-                            <h4 class="network-name"><a href="https://elicit.com/" target="_blank" rel="noopener noreferrer">Elicit</a></h4>
-                            <p class="network-description">Инструмент для научных исследований, использующий нейросети для анализа научных статей, извлечения ключевой информации и помощи в обзоре литературы.</p>
+                            <h4 class="network-name"><a href="https://deepmind.google/technologies/genie/" target="_blank" rel="noopener noreferrer">Genie (Google DeepMind)</a></h4>
+                            <p class="network-description">Экспериментальная модель, сфокусированная на генерации интерактивных 2D-игр по текстовым описаниям.</p>
                         </li>
                     </ul>
                 </div>
+
+                 <div class="category-content" data-category="code">
+                    <h3 class="category-content-title">Генерация кода</h3>
+                    <p class="category-content-description">Инструменты на основе ИИ, помогающие разработчикам писать, отлаживать и оптимизировать код, а также генерировать целые функции или скрипты по описанию задачи.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://github.com/features/copilot/" target="_blank" rel="noopener noreferrer">GitHub Copilot</a></h4>
+                            <p class="network-description">Популярный инструмент от GitHub на базе моделей OpenAI, предлагающий автодополнение и генерацию кода прямо в IDE.</p>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://deepmind.google/technologies/alphacode/" target="_blank" rel="noopener noreferrer">AlphaCode (Google DeepMind)</a></h4>
+                            <p class="network-description">Разработан для решения сложных задач программирования, часто на уровне участников соревнований.</p>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://about.tabnine.com/" target="_blank" rel="noopener noreferrer">Tabnine</a></h4>
+                            <p class="network-description">Инструмент для автодополнения кода, работающий локально или в облаке, поддерживает множество языков и IDE.</p>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://replit.com/ghostwriter" target="_blank" rel="noopener noreferrer">Replit Ghostwriter</a></h4>
+                            <p class="network-description">Интегрированный в онлайн-IDE Replit помощник по коду, предлагающий генерацию, преобразование и отладку.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                 <div class="category-content" data-category="other">
+                    <h3 class="category-content-title">Другие категории</h3>
+                    <p class="category-content-description">Широкий спектр нейросетей и ИИ-систем, применяемых в науке, медицине, промышленности, робототехнике, играх и других областях, где требуется анализ данных, прогнозирование или автоматизация сложных задач.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://deepmind.google/technologies/alphafold/" target="_blank" rel="noopener noreferrer">AlphaFold (Google DeepMind)</a></h4>
+                            <p class="network-description">Революционная система для предсказания 3D-структуры белков на основе их аминокислотной последовательности.</p>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name">Медицинские диагностические ИИ</h4>
+                            <p class="network-description">Нейросети для анализа медицинских изображений (рентген, МРТ, КТ), обнаружения заболеваний и помощи в постановке диагноза.</p>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name">Промышленные системы контроля качества</h4>
+                            <p class="network-description">ИИ, использующий машинное зрение для автоматической инспекции продукции на производственных линиях.</p>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name">Нейросети для финансовых прогнозов</h4>
+                            <p class="network-description">Модели для анализа рыночных данных и предсказания трендов, используемые в алгоритмической торговле.</p>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="container footer-container">
-            <p class="footer-text">© 2025 НейроГид.</p>
+            <p class="footer-text">&copy; 2025 НейроГид.</p>
             <nav class="footer-nav">
                 <ul class="footer-nav-list">
-                    <li class="footer-nav-item"></li>
+                     <!-- Footer links -->
                 </ul>
             </nav>
         </div>

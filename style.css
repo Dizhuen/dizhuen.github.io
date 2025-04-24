@@ -55,23 +55,37 @@
 .dark-theme .network-description,
 .dark-theme .news-card-description,
 .dark-theme .footer-text,
-.dark-theme .footer-nav-link {
-    color: var(--text-color-light);
+.dark-theme .footer-nav-link,
+.dark-theme .comparison-section-description, /* Added */
+.dark-theme .comparison-features li { /* Added */
+     color: var(--text-color-light);
     opacity: 0.8;
 }
 
 
 .dark-theme .news,
-.dark-theme .categories,
+.dark-theme .categories, /* This styles the categories page background element */
 .dark-theme .categories-preview,
 .dark-theme .footer,
 .dark-theme .news-card,
 .dark-theme .category-card,
-.dark-theme .category-content {
+.dark-theme .category-content /* Styles category content blocks on both pages */ {
     background-color: rgb(10 10 10 / 23%);
     box-shadow: -16px -14px 20px 0px rgb(0 0 0);
     border-color: var(--border-color-dark);
 }
+
+/* Style for comparison page main section */
+.dark-theme .comparison {
+    padding: 60px 0;
+    border-radius: 10px;
+    margin-bottom: 60px;
+     background-color: rgb(10 10 10 / 23%);
+    box-shadow: -16px -14px 20px 0px rgb(0 0 0);
+    border-color: var(--border-color-dark);
+     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 
 .dark-theme .news-card-link,
 .dark-theme .review-card-link,
@@ -91,6 +105,49 @@
 .dark-theme .footer {
     background-color: rgba(0, 0, 0, 0.5);
     border-top-color: var(--border-color-dark);
+}
+
+/* Added styles for comparison features and rating */
+.dark-theme .comparison-details {
+    margin-top: 15px;
+}
+
+.dark-theme .comparison-details h5 {
+    font-family: var(--font-family-title);
+    font-size: 1rem;
+    margin-bottom: 8px;
+     color: var(--primary-color); /* Highlight section titles */
+}
+
+.dark-theme .comparison-features {
+    list-style: none; /* Remove default list style */
+    padding: 0;
+    margin: 0;
+}
+
+.comparison-features li {
+     font-size: 0.95rem;
+     line-height: 1.4;
+     margin-bottom: 5px;
+     opacity: 0.9;
+     position: relative;
+     padding-left: 20px; /* Space for custom bullet */
+}
+
+.comparison-features li::before { /* Custom bullet point */
+     content: '•';
+     color: var(--primary-color);
+     font-weight: bold;
+     display: inline-block;
+     width: 1em;
+     margin-left: -1em;
+}
+
+.network-rating {
+     margin-top: 10px;
+     font-size: 1rem;
+     font-weight: 700;
+     color: var(--primary-color); /* Use accent color for rating */
 }
 
 
@@ -242,11 +299,16 @@ body {
 .burger-line {
     width: 25px;
     height: 3px;
-    background-color: var(--text-color-dark);
+    background-color: var(--text-color-dark); /* Adjust burger line color for dark theme */
     margin: 5px 0;
     display: block;
     transition: all 0.3s ease;
 }
+
+.dark-theme .burger-line {
+     background-color: var(--text-color-light);
+}
+
 
 .burger-menu.active .burger-line:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
@@ -299,12 +361,6 @@ body {
 
 }
 
-.section-title {
-    font-size: 2.2rem;
-       transition: color 0.3s ease;
-}
-
-
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -321,6 +377,7 @@ body {
     animation: fadeInSlideUp 0.6s ease-out forwards var(--card-animation-delay, 0.2s);
     display: flex;
     flex-direction: column;
+    background: var(--card-background-dark); /* Ensure card background is set */
 }
 
 .news-card-image-container {
@@ -355,13 +412,13 @@ body {
     font-size: 1.1rem;
 }
 
-/* Adjust existing news-card styles */
-.news-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background: var(--card-background-dark);
+.loading-message { /* Added */
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1rem;
+    opacity: 0.8;
 }
+
 
 @keyframes fadeInSlideUp {
     from {
@@ -410,12 +467,24 @@ body {
       transition: color 0.3s ease;
 }
 
+.news-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Push to the bottom */
+}
+
+.news-card-date {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
 .news-card-link {
     display: inline-block;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
-    margin-top: 15px;
+    /* margin-top: 15px; Removed, handled by footer flex */
 }
 
 .news-more {
@@ -423,26 +492,30 @@ body {
 }
 
 
-/* Секция категорий (вкладки) */
-.categories {
+/* Секция категорий (вкладки - используется на Категориях и Сравнении) */
+.categories, .comparison { /* Apply shared tab container styles */
     padding: 60px 0;
     border-radius: 10px;
     margin-bottom: 60px;
       transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.categories-container { }
-
-.category-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-    border-bottom: 2px solid var(--border-color-dark);
+.categories-container, .comparison-container { /* Apply shared container styles */
+    /* Add specific padding/max-width if needed */
 }
 
-.category-tab {
+.category-tabs { /* Tabs container */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px; /* Add gap between buttons */
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color-dark); /* Keep border bottom */
+}
+
+.category-tab { /* Individual tab button */
     background: none;
-    border: none;
+    border: none; /* Remove individual border */
     padding: 10px 20px;
     font-family: var(--font-family-title);
     font-size: 1.1rem;
@@ -450,24 +523,27 @@ body {
     color: var(--text-color-light);
     cursor: pointer;
     transition: color 0.3s ease, border-bottom-color 0.3s ease;
-    border-bottom: 2px solid #15bd99f2;
-    margin-bottom: -2px;
+    border-bottom: 2px solid transparent; /* Start with transparent border */
+    margin-bottom: -2px; /* Compensate border width */
 }
 
-.category-tab:hover, .category-tab.active-tab {
+.category-tab:hover {
     color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
+     border-bottom-color: rgba(38, 166, 154, 0.5); /* Semi-transparent highlight on hover */
 }
 
-.active-tab {
-    border-bottom: var(--primary-color);
+.category-tab.active-tab { /* Active tab state */
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color); /* Solid color for active tab */
 }
 
 
-.category-content {
+.category-content { /* Content div for each tab */
     padding: 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 5px; /* Rounded corners for content block */
+    /* Background and shadow inherited from dark-theme .category-content */
+    opacity: 0; /* Start with 0 opacity for fade-in */
+    transition: opacity 0.3s ease; /* Smooth fade in/out */
 }
 
 .category-content-title {
@@ -479,12 +555,13 @@ body {
     transition: color 0.3s ease;
 }
 
-.category-content-description {
+.category-content-description, .comparison-section-description { /* Styles for descriptions under titles */
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 25px;
       transition: color 0.3s ease;
 }
+
 
 .networks-list {
     list-style: none;
@@ -517,6 +594,61 @@ body {
     line-height: 1.5;
     transition: color 0.3s ease;
 }
+
+.network-name a { /* Style for links within network names */
+    color: inherit; /* Inherit color from .network-name */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease;
+}
+
+.network-name a:hover {
+    color: var(--primary-color); /* Change color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Added styles for comparison details */
+.comparison-details {
+    margin-top: 15px;
+}
+
+.comparison-details h5 {
+    font-family: var(--font-family-title);
+    font-size: 1rem;
+    margin-bottom: 8px;
+     color: var(--primary-color); /* Highlight section titles */
+}
+
+.comparison-features {
+    list-style: none; /* Remove default list style */
+    padding: 0;
+    margin: 0;
+}
+
+.comparison-features li {
+     font-size: 0.95rem;
+     line-height: 1.4;
+     margin-bottom: 5px;
+     opacity: 0.9;
+     position: relative;
+     padding-left: 20px; /* Space for custom bullet */
+}
+
+.comparison-features li::before { /* Custom bullet point */
+     content: '•';
+     color: var(--primary-color);
+     font-weight: bold;
+     display: inline-block;
+     width: 1em;
+     margin-left: -1em;
+}
+
+.network-rating {
+     margin-top: 10px;
+     font-size: 1rem;
+     font-weight: 700;
+     color: var(--primary-color); /* Use accent color for rating */
+}
+
 
 .hidden {
     display: none !important;
@@ -630,23 +762,37 @@ body {
         display: block; /* Показываем бургер-меню на мобильных */
     }
 
+    /* Adjust category tabs for mobile */
     .category-tabs {
         flex-direction: column;
         align-items: center;
+        gap: 5px; /* Reduced gap */
+        border-bottom: none; /* Remove border bottom on mobile */
     }
     .category-tab {
-        margin-bottom: 10px;
-        border-bottom: 2px solid var(--primary-color);
-        width: 100%;
+        width: 90%; /* Make tabs wider */
+        max-width: 300px; /* Max width for tabs */
         text-align: center;
+        padding: 12px 20px; /* Adjust padding */
+        font-size: 1rem; /* Adjust font size */
+        border: 2px solid transparent; /* Add border style */
+         border-radius: 5px; /* Add border radius */
+        margin-bottom: 5px; /* Add margin between stacked tabs */
     }
-    .category-tab:last-child {
-        margin-bottom: 0;
-        border-bottom: 2px solid transparent;
-    }
-    .category-tab.active-tab {
-        border-bottom: 2px solid var(--primary-color);
-    }
+     .category-tab:hover {
+         background-color: rgba(38, 166, 154, 0.1); /* Light background on hover */
+         border-color: rgba(38, 166, 154, 0.5);
+         color: var(--primary-color);
+     }
+     .category-tab.active-tab {
+         background-color: var(--primary-color); /* Solid background for active */
+         color: var(--text-color-dark); /* Dark text on active background */
+         border-color: var(--primary-color);
+     }
+      .category-tab:last-child {
+         margin-bottom: 0; /* Remove margin for last item */
+      }
+
 
 }
 
@@ -659,7 +805,7 @@ body {
         font-size: 1rem;
     }
 
-    .news-grid, .reviews-grid, .categories-grid {
+    .news-grid {
         grid-template-columns: 1fr;
     }
 

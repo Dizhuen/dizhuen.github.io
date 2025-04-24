@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>НейроГид - Сравнение нейросетей</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body class="dark-theme categories-page-bg">
+    <div class="background-animation" id="background-animation">
+        <svg class="procedural-waves" viewBox="0 0 800 600" preserveAspectRatio="none">
+            <!-- Процедурные волны будут добавлены сюда через JavaScript -->
+        </svg>
+    </div>
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Нейро<span class="logo-accent">Гид</span></a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="categories.html" class="nav-link">Категории</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link active">Сравнение</a></li> <!-- Active link -->
+                    <li class="nav-item"><a href="news.html" class="nav-link">Новости</a></li>
+                </ul>
+            </nav>
+            <button class="burger-menu" aria-label="Открыть меню">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+         <section class="comparison" id="comparison-section"> <!-- Use 'comparison' class for styling -->
+             <div class="container comparison-container">
+                <h1 class="section-title">Сравнение нейросетей</h1>
+                 <p class="section-subtitle">Подробное сравнение популярных нейросетей в каждой категории с субъективной оценкой.</p>
+
+                 <div class="category-tabs"> <!-- Use same tab classes -->
+                    <button class="category-tab" data-category="image">Генерация изображений</button>
+                    <button class="category-tab" data-category="text">Генерация текста</button>
+                    <button class="category-tab" data-category="audio">Генерация аудио</button>
+                    <button class="category-tab" data-category="video">Генерация видео</button>
+                    <button class="category-tab" data-category="code">Генерация кода</button>
+                    <button class="category-tab" data-category="other">Другие</button>
+                </div>
+
+                <!-- Content for each tab - Comparison Details - ADDED data-category ATTRIBUTES -->
+                <div class="category-content" data-category="image">
+                    <h3 class="category-content-title">Генерация изображений</h3>
+                    <p class="comparison-section-description">Сравнение нейросетей, специализирующихся на создании изображений по текстовому описанию или на основе других изображений.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://openai.com/dall-e-3" target="_blank" rel="noopener noreferrer">DALL-E 3</a></h4>
+                            <p class="network-description">Разработана OpenAI, отличается глубоким пониманием сложных текстовых запросов и способностью генерировать текст внутри изображений.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество изображений: <span class="network-rating">Высокое</span></li>
+                                    <li>Понимание промптов: <span class="network-rating">Отличное</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Простое (интеграция в сервисы)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Платный API/через сервисы</span></li>
+                                    <li>Уникальные черты: Лучше всего справляется с текстом в изображениях, интегрирован с ChatGPT.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer">Midjourney</a></h4>
+                            <p class="network-description">Известна своим уникальным художественным стилем и возможностями тонкой настройки через команды в Discord.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество изображений: <span class="network-rating">Превосходное (художественное)</span></li>
+                                    <li>Понимание промптов: <span class="network-rating">Хорошее (требует специфики)</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Среднее (через Discord)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Платная подписка</span></li>
+                                    <li>Уникальные черты: Лучший художественный стиль, активное сообщество, сложные настройки параметров.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://stablediffusion.com/" target="_blank" rel="noopener noreferrer">Stable Diffusion</a></h4>
+                            <p class="network-description">Открытая модель, предлагающая высокую гибкость и возможность запуска на собственном оборудовании.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество изображений: <span class="network-rating">Очень высокое (зависит от модели)</span></li>
+                                    <li>Понимание промптов: <span class="network-rating">Хорошее (требует точности)</span></li>
+                                    <li>Удобство использования: <span class="network-rating">От среднего до сложного (нужна установка/настройка)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Бесплатно (открытый код), есть платные сервисы</span></li>
+                                    <li>Уникальные черты: Открытый исходный код, огромная экосистема моделей, полная кастомизация.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://ideogram.ai/" target="_blank" rel="noopener noreferrer">Ideogram</a></h4>
+                            <p class="network-description">Специализируется на генерации изображений с текстом и типографикой.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество изображений: <span class="network-rating">Высокое</span></li>
+                                    <li>Понимание промптов: <span class="network-rating">Хорошее</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Простое (веб-интерфейс)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Лучшая нейросеть для работы с текстом внутри изображений.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://leonardo.ai/" target="_blank" rel="noopener noreferrer">Leonardo.AI</a></h4>
+                            <p class="network-description">Платформа с множеством моделей и инструментов для художников и дизайнеров.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество изображений: <span class="network-rating">Высокое</span></li>
+                                    <li>Понимание промптов: <span class="network-rating">Хорошее</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Отличная платформа с инструментами</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Широкий набор инструментов для постобработки и управления генерацией.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="category-content" data-category="text">
+                    <h3 class="category-content-title">Генерация текста</h3>
+                     <p class="comparison-section-description">Сравнение ведущих языковых моделей, способных генерировать связный и информативный текст.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://openai.com/gpt-4" target="_blank" rel="noopener noreferrer">GPT-4</a></h4>
+                            <p class="network-description">Одна из самых мощных и универсальных моделей в мире, разработанная OpenAI.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество текста: <span class="network-rating">Превосходное</span></li>
+                                    <li>Понимание контекста: <span class="network-rating">Отличное</span></li>
+                                    <li>Разнообразие задач: <span class="network-rating">Высокое</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Платный API/через сервисы (ChatGPT Plus)</span></li>
+                                    <li>Уникальные черты: Очень универсальная, может писать код, стихи, статьи, вести сложные диалоги.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude 3</a></h4>
+                            <p class="network-description">Семейство моделей от Anthropic, делающее акцент на безопасность, этичность и обработку очень длинных текстов.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество текста: <span class="network-rating">Превосходное</span></li>
+                                    <li>Понимание контекста: <span class="network-rating">Отличное (большое окно контекста)</span></li>
+                                    <li>Разнообразие задач: <span class="network-rating">Высокое</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Платный API/через веб-интерфейс</span></li>
+                                    <li>Уникальные черты: Лучшая для обработки длинных документов, высокая безопасность и следование инструкциям.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini</a></h4>
+                            <p class="network-description">Мультимодальная модель от Google, глубоко интегрированная с поиском и другими сервисами Google.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество текста: <span class="network-rating">Очень высокое</span></li>
+                                    <li>Понимание контекста: <span class="network-rating">Хорошее</span></li>
+                                    <li>Разнообразие задач: <span class="network-rating">Высокое (мультимодальность)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции (Gemini Advanced)</span></li>
+                                    <li>Уникальные черты: Отличная интеграция с экосистемой Google, понимание различных типов данных (текст, изображения, аудио).</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://llama.meta.com/" target="_blank" rel="noopener noreferrer">LLaMA (Meta)</a></h4>
+                            <p class="network-description">Семейство открытых языковых моделей от Meta, популярных среди исследователей и разработчиков.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество текста: <span class="network-rating">Высокое (зависит от версии и дообучения)</span></li>
+                                    <li>Понимание контекста: <span class="network-rating">Хорошее</span></li>
+                                    <li>Разнообразие задач: <span class="network-rating">Высокое (гибкость)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Бесплатно (для исследований/комм.использования)</span></li>
+                                    <li>Уникальные черты: Открытый исходный код, возможность запуска локально, большая база для дообучения и модификации.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://yandex.ru/gpt" target="_blank" rel="noopener noreferrer">YandexGPT</a></h4>
+                            <p class="network-description">Крупная языковая модель от Яндекса, адаптированная для русскоязычного контента.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество текста: <span class="network-rating">Очень высокое (на русском)</span></li>
+                                    <li>Понимание контекста: <span class="network-rating">Хорошее</span></li>
+                                    <li>Разнообразие задач: <span class="network-rating">Среднее-Высокое</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Доступно через сервисы Яндекса</span></li>
+                                    <li>Уникальные черты: Глубокое понимание русского языка и специфики российского контекста.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="category-content" data-category="audio">
+                    <h3 class="category-content-title">Генерация аудио</h3>
+                    <p class="comparison-section-description">Сравнение ИИ-инструментов для создания музыки, голосов и других звуковых эффектов.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://www.suno.ai/" target="_blank" rel="noopener noreferrer">SunoAI</a></h4>
+                            <p class="network-description">Позволяет создавать полноценные песни с вокалом по текстовому описанию.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество аудио: <span class="network-rating">Высокое (особенно вокал)</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Очень простое</span></li>
+                                    <li>Креативность: <span class="network-rating">Высокая</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Генерирует готовые песни с текстом и аранжировкой, разные жанры.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://elevenlabs.io/" target="_blank" rel="noopener noreferrer">ElevenLabs</a></h4>
+                            <p class="network-description">Лидер в области синтеза речи и клонирования голоса, создает очень реалистичные голоса.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Реализм голоса: <span class="network-rating">Исключительный</span></li>
+                                    <li>Разнообразие голосов: <span class="network-rating">Высокое (клонирование, библиотека)</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Простое</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Лучшее качество синтеза речи, возможность клонирования голоса с высокой точностью.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://www.udio.com/" target="_blank" rel="noopener noreferrer">Udio</a></h4>
+                            <p class="network-description">Ещё одна платформа для создания музыки по текстовому описанию, фокусирующаяся на жанровом разнообразии.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество аудио: <span class="network-rating">Высокое</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Простое</span></li>
+                                    <li>Креативность: <span class="network-rating">Высокая</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Хорошо подходит для экспериментов с разными музыкальными стилями и структурами.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://openai.com/sora" target="_blank" rel="noopener noreferrer">Voice Engine (OpenAI)</a></h4>
+                             <p class="network-description">Технология синтеза речи от OpenAI, способная воспроизводить человеческие голоса с высокой точностью.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                     <li>Реализм голоса: <span class="network-rating">Очень высокий</span></li>
+                                     <li>Клонирование: <span class="network-rating">Возможность (с согласия)</span></li>
+                                     <li>Удобство использования: <span class="network-rating">Зависит от интеграции</span></li>
+                                     <li>Цена/Доступность: <span class="network-rating">Ограниченный доступ</span></li>
+                                     <li>Уникальные черты: Одна из самых реалистичных моделей клонирования голоса, фокус на этичность использования.</li>
+                                </ul>
+                             </div>
+                        </li>
+                    </ul>
+                </div>
+
+                 <div class="category-content" data-category="video">
+                    <h3 class="category-content-title">Генерация видео</h3>
+                    <p class="comparison-section-description">Сравнение нейросетей, способных создавать видеоконтент по текстовым описаниям или изображениям.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://openai.com/sora" target="_blank" rel="noopener noreferrer">Sora (OpenAI)</a></h4>
+                            <p class="network-description">Модель от OpenAI, способная создавать реалистичные и связные видео до одной минуты по текстовому описанию.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество видео: <span class="network-rating">Исключительное</span></li>
+                                    <li>Длина видео: <span class="network-rating">До 1 минуты</span></li>
+                                    <li>Понимание промптов: <span class="network-rating">Отличное</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Ограниченный доступ (на момент анонса)</span></li>
+                                    <li>Уникальные черты: Высочайшая реалистичность и когерентность сцен, способность генерировать сложные движения камеры.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://www.runwayml.com/" target="_blank" rel="noopener noreferrer">RunwayML</a></h4>
+                            <p class="network-description">Платформа с набором ИИ-инструментов для видеоредактирования и генерации видео (Gen-1, Gen-2).</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество видео: <span class="network-rating">Высокое</span></li>
+                                    <li>Длина видео: <span class="network-rating">Короткие клипы</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Отличное (платформа)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Интеграция генерации с мощными инструментами для ИИ-редактирования видео.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://pika.art/" target="_blank" rel="noopener noreferrer">Pika Labs</a></h4>
+                            <p class="network-description">Нейросеть для создания коротких видео и анимаций, часто используется через Discord или веб.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество видео: <span class="network-rating">Хорошее</span></li>
+                                    <li>Длина видео: <span class="network-rating">Короткие клипы/анимации</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Простое</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Быстрая генерация, акцент на анимированный стиль и простые промпты.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://deepmind.google/technologies/genie/" target="_blank" rel="noopener noreferrer">Genie (Google DeepMind)</a></h4>
+                            <p class="network-description">Экспериментальная модель, сфокусированная на генерации интерактивных 2D-игр по текстовым описаниям.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество: <span class="network-rating">Экспериментальное</span></li>
+                                    <li>Интерактивность: <span class="network-rating">Высокая (для игр)</span></li>
+                                    <li>Удобство использования: <span class="network-rating">Неизвестно (исследование)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Недоступно (исследование)</span></li>
+                                    <li>Уникальные черты: Генерация не просто видео, а интерактивных виртуальных сред (игр), уникальный подход.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                 <div class="category-content" data-category="code">
+                    <h3 class="category-content-title">Генерация кода</h3>
+                    <p class="comparison-section-description">Сравнение инструментов на основе ИИ для помощи в программировании.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://github.com/features/copilot/" target="_blank" rel="noopener noreferrer">GitHub Copilot</a></h4>
+                            <p class="network-description">Популярный инструмент от GitHub на базе моделей OpenAI, предлагающий автодополнение и генерацию кода прямо в IDE.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество кода: <span class="network-rating">Высокое</span></li>
+                                    <li>Скорость: <span class="network-rating">Очень высокая (интеграция)</span></li>
+                                    <li>Языки: <span class="network-rating">Множество</span></li>
+                                    <li>Интеграция: <span class="network-rating">Отличная (IDE)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Платная подписка</span></li>
+                                    <li>Уникальные черты: Лучшая интеграция в рабочие процессы разработчика, обучение на огромном корпусе кода GitHub.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://deepmind.google/technologies/alphacode/" target="_blank" rel="noopener noreferrer">AlphaCode (Google DeepMind)</a></h4>
+                            <p class="network-description">Разработан для решения сложных задач программирования, часто на уровне участников соревнований.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество кода: <span class="network-rating">Высокое (для задач)</span></li>
+                                    <li>Скорость: <span class="network-rating">Зависит от задачи</span></li>
+                                    <li>Языки: <span class="network-rating">Несколько популярных</span></li>
+                                    <li>Интеграция: <span class="network-rating">Низкая (исследование)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Недоступно (исследование)</span></li>
+                                    <li>Уникальные черты: Фокус на алгоритмическое мышление и решение комплексных задач, а не на рутинную генерацию.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://about.tabnine.com/" target="_blank" rel="noopener noreferrer">Tabnine</a></h4>
+                            <p class="network-description">Инструмент для автодополнения кода, работающий локально или в облаке, поддерживает множество языков и IDE.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество кода: <span class="network-rating">Хорошее (автодополнение)</span></li>
+                                    <li>Скорость: <span class="network-rating">Высокая</span></li>
+                                    <li>Языки: <span class="network-rating">Множество</span></li>
+                                    <li>Интеграция: <span class="network-rating">Отличная (IDE)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Есть бесплатный план, платные опции</span></li>
+                                    <li>Уникальные черты: Возможность локального запуска для конфиденциальности кода, фокус на точном контекстном автодополнении.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name"><a href="https://replit.com/ghostwriter" target="_blank" rel="noopener noreferrer">Replit Ghostwriter</a></h4>
+                            <p class="network-description">Интегрированный в онлайн-IDE Replit помощник по коду, предлагающий генерацию, преобразование и отладку.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Качество кода: <span class="network-rating">Хорошее</span></li>
+                                    <li>Скорость: <span class="network-rating">Высокая (в IDE)</span></li>
+                                    <li>Языки: <span class="network-rating">Поддерживаемые в Replit</span></li>
+                                    <li>Интеграция: <span class="network-rating">Исключительная (в Replit)</span></li>
+                                    <li>Цена/Доступность: <span class="network-rating">Доступно через Replit (есть платные планы)</span></li>
+                                    <li>Уникальные черты: Полная интеграция в облачную среду разработки, удобен для новичков и быстрого прототипирования.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="category-content" data-category="other">
+                    <h3 class="category-content-title">Другие категории</h3>
+                    <p class="comparison-section-description">Сравнение некоторых специализированных ИИ-систем из различных областей.</p>
+                    <ul class="networks-list">
+                        <li class="network-item">
+                            <h4 class="network-name"><a href="https://deepmind.google/technologies/alphafold/" target="_blank" rel="noopener noreferrer">AlphaFold (Google DeepMind)</a></h4>
+                            <p class="network-description">Революционная система для предсказания 3D-структуры белков на основе их аминокислотной последовательности.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Точность предсказания: <span class="network-rating">Исключительная</span></li>
+                                    <li>Область применения: <span class="network-rating">Биология, медицина</span></li>
+                                    <li>Влияние: <span class="network-rating">Высочайшее</span></li>
+                                    <li>Доступность: <span class="network-rating">База данных открыта</span></li>
+                                    <li>Уникальные черты: Решила одну из давних проблем биологии, ускорила научные исследования.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name">ИИ для медицинской визуализации</h4>
+                            <p class="network-description">Нейросети для анализа рентгеновских снимков, МРТ, КТ и других изображений для помощи врачам в диагностике.</p>
+                            <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Точность: <span class="network-rating">Высокая (зависит от задачи)</span></li>
+                                    <li>Область применения: <span class="network-rating">Медицина (радиология, патология и т.д.)</span></li>
+                                    <li>Влияние: <span class="network-rating">Значительное (повышает скорость и точность)</span></li>
+                                    <li>Доступность: <span class="network-rating">Интегрированы в мед. оборудование/ПО</span></li>
+                                    <li>Уникальные черты: Способность выявлять паттерны, незаметные человеческому глазу, помощь в ранней диагностике.</li>
+                                </ul>
+                            </div>
+                        </li>
+                         <li class="network-item">
+                            <h4 class="network-name">Генеративные модели для материаловедения</h4>
+                            <p class="network-description">ИИ, используемый для предсказания свойств новых материалов или генерации структур материалов с заданными свойствами.</p>
+                             <div class="comparison-details">
+                                <h5>Оценка и Особенности:</h5>
+                                <ul class="comparison-features">
+                                    <li>Точность предсказания: <span class="network-rating">Высокая (в зависимости от данных)</span></li>
+                                    <li>Область применения: <span class="network-rating">Материаловедение, химия</span></li>
+                                    <li>Влияние: <span class="network-rating">Растущее (ускоряет R&D)</span></li>
+                                    <li>Доступность: <span class="network-rating">Часто исследовательские/проприетарные</span></li>
+                                    <li>Уникальные черты: Позволяют исследовать огромное пространство потенциальных материалов, находить неочевидные связи.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <p class="footer-text">&copy; 2025 НейроГид.</p>
+            <nav class="footer-nav">
+                <ul class="footer-nav-list">
+                     <!-- Footer links -->
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>
